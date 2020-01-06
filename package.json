@@ -5,7 +5,7 @@
   "author": "Jason Clark <jason@jjasonclark.com> (https://jjasonclark.com)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jjasonclark/sqrl-min-auth/tree/master/packages/memory-sqrl-store"
+    "url": "https://github.com/jjasonclark/memory-sqrl-store"
   },
   "version": "0.5.0",
   "main": "src/index.js",
