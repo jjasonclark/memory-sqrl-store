@@ -16,6 +16,7 @@ class MemorySqrlStore {
       hmac: it.hmac,
       ip: it.ip,
       user_id: it.user_id,
+      ask: it.ask,
       created: new Date().toISOString(),
       used: null,
       issued: null,
