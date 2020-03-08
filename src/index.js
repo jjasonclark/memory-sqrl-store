@@ -17,8 +17,8 @@ class MemorySqrlStore {
       ip: it.ip,
       user_id: it.user_id,
       ask: it.ask,
+      idk: it.idk,
       created: new Date().toISOString(),
-      used: null,
       issued: null,
       identified: null
     };
@@ -56,6 +56,14 @@ class MemorySqrlStore {
     return idks.reduce((memo, idk) => [...memo, this.sqrl[idk] || null], []);
   }
 
+  async retrieveSqrlByUser(id) {
+    try {
+      return Object.values(this.sqrl).find(sqrl => sqrl.user_id === id);
+    } catch (ex) {
+      return null;
+    }
+  }
+
   async updateSqrl(it) {
     if (this.sqrl[it.idk]) {
       this.sqrl[it.idk] = it;
@@ -64,16 +72,9 @@ class MemorySqrlStore {
     return null;
   }
 
-  async deleteSqrl(it) {
-    this.sqrl
-      .filter(sqrl => sqrl.user_id === it.user_id)
-      .forEach(sqrl => {
-        delete this.sqrl[sqrl.idk];
-      });
-  }
-
+  // Not part of the spec, but useful
+  // Create an account
   async createUser() {
-    // Create an account
     const user = {
       id: Object.keys(this.users).length + 1,
       created: new Date().toISOString()
@@ -84,16 +85,6 @@ class MemorySqrlStore {
 
   async retrieveUser(id) {
     return this.users[id];
-  }
-
-  async deleteUser(id) {
-    // Delete user
-    if (this.users[id]) {
-      const user = this.users[id];
-      delete this.users[id];
-      return user;
-    }
-    return null;
   }
 }
 
